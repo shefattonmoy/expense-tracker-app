@@ -14,24 +14,35 @@ class Expenses extends StatefulWidget {
 
 class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [
-    Expense(title: 'Flutter Course', amount: 19.99, date: DateTime.now(), category: Category.work),
-    Expense(title: 'Cinema', amount: 15.69, date: DateTime.now(), category: Category.leisure),
+    Expense(
+      title: 'Flutter Course',
+      amount: 19.99,
+      date: DateTime.now(),
+      category: Category.work,
+    ),
+    Expense(
+      title: 'Cinema',
+      amount: 15.69,
+      date: DateTime.now(),
+      category: Category.leisure,
+    ),
   ];
 
   void _openAddExpenseOverlay() {
-    showModalBottomSheet(isScrollControlled: true, context: context, builder: (ctx) => NewExpense(onAddExpense: _addExpenses,),
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => NewExpense(onAddExpense: _addExpenses),
     );
   }
 
-  void _addExpenses(Expense expense)
-  {
+  void _addExpenses(Expense expense) {
     setState(() {
       _registeredExpenses.add(expense);
     });
   }
 
-  void _removeExpenses(Expense expense)
-  {
+  void _removeExpenses(Expense expense) {
     setState(() {
       _registeredExpenses.remove(expense);
     });
@@ -43,14 +54,23 @@ class _ExpensesState extends State<Expenses> {
       appBar: AppBar(
         title: const Text('Expense Tracker'),
         actions: [
-          IconButton(onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add,)),
+          IconButton(
+            onPressed: _openAddExpenseOverlay,
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
-      body: Column(children: [
-      const Text('Chart'),
-      Expanded(child: ExpenseList(expenses: _registeredExpenses, onRemoveExpense: _removeExpenses,),),
-    ],
-    ),
+      body: Column(
+        children: [
+          const Text('Chart'),
+          Expanded(
+            child: ExpenseList(
+              expenses: _registeredExpenses,
+              onRemoveExpense: _removeExpenses,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
